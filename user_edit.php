@@ -17,7 +17,7 @@ $pdo = connect_to_db();
 $sql = '';
 
 // SQL準備&実行
-$sql = 'SELECT*FROM foveritemo_user_table WHERE id=:id';
+$sql = 'SELECT*FROM faveritemo_user_table WHERE id=:id';
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();

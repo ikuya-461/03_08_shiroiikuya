@@ -15,7 +15,7 @@ $pdo = connect_to_db();
 
 
 // DELETE文を作成&実行
-$sql = "DELETE FROM foveritemo_user_table WHERE id=:id";
+$sql = "DELETE FROM faveritemo_user_table WHERE id=:id";
 $stmt = $pdo->prepare($sql);
 
 //↓宣言してない変数なので必要ない（項目ではtodo,deadline）

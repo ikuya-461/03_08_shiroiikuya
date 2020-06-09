@@ -5,7 +5,7 @@ include('functions.php');
 $pdo = connect_to_db();
 
 // データ取得SQL作成
-$sql = 'SELECT * FROM foveritemo_user_table';
+$sql = 'SELECT * FROM faveritemo_user_table';
 
 // SQL準備&実行
 $stmt = $pdo->prepare($sql);

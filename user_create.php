@@ -8,7 +8,8 @@
 // 値が存在しないor空で送信されてきた場合はNGにする
 if (
     !isset($_POST['email']) || $_POST['email'] == '' ||
-    !isset($_POST['password']) || $_POST['password'] == '') {
+    !isset($_POST['password']) || $_POST['password'] == ''
+) {
     // 項目が入力されていない場合はここでエラーを出力し，以降の処理を中止する
     echo json_encode(["error_msg" => "no input"]);
     exit();
@@ -24,7 +25,7 @@ $pdo = connect_to_db();
 
 // データ登録SQL作成
 // `created_at`と`updated_at`には実行時の`sysdate()`関数を用いて実行時の日時を入力する
-$sql = 'INSERT INTO foveritemo_user_table(email, password, id) VALUES(:email, :password, NULL)';
+$sql = 'INSERT INTO faveritemo_user_table(id ,email, password) VALUES(NULL, :email, :password)';
 
 // SQL準備&実行
 $stmt = $pdo->prepare($sql);

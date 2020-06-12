@@ -54,7 +54,7 @@ if ($status == false) {
             <legend>ユーザー情報（編集画面）</legend>
             <a href="user_read.php">一覧画面</a>
             <div>
-                user: <input type="text" name="email" value="<?= $record['email'] ?>">
+                user: <input type="text" name="user_id" value="<?= $record['user_id'] ?>">
             </div>
             <div>
                 password: <input type="text" name="password" value="<?= $record['password'] ?>">

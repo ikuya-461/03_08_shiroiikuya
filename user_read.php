@@ -26,7 +26,7 @@ if ($status == false) {
     // `.=`は後ろに文字列を追加する，の意味
     foreach ($result as $record) {
         $output .= "<tr>";
-        $output .= "<td>{$record["email"]}</td>";
+        $output .= "<td>{$record["user_id"]}</td>";
         $output .= "<td>{$record["password"]}</td>";
         // edit deleteリンクを追加
         $output .= "<td><a href='user_edit.php?id={$record["id"]}'>edit</a></td>";
@@ -48,7 +48,7 @@ if ($status == false) {
     <link href="https://fonts.googleapis.com/css?family=Ravi+Prakash" rel="stylesheet">
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
     <title>ユーザー管理</title>
-    <script type="text/javascript" src="js/top.js"></script>
+    <!-- <script type="text/javascript" src="js/top.js"></script> -->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <link type="text/css" rel="stylesheet" href="css/main.css">
 
@@ -57,11 +57,11 @@ if ($status == false) {
 <body>
 
     <h1>ユーザー管理画面</h1>
-    <a href="login.php">login画面へもどる</a>
+    <a href="user_login.php">login画面へもどる</a>
     <table>
         <thead>
             <tr>
-                <th>email</th>
+                <th>user_id</th>
                 <th>password</th>
                 <th></th>
                 <th></th>

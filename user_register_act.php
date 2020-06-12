@@ -1,16 +1,16 @@
 <?php
 
-// 送信確認
 // var_dump($_POST);
 // exit();
 
 // 関数ファイル読み込み
 include('functions.php');
 
-// 受け取ったデータを変数に入れる
-$user_id = $_POST['user_id'];
-$password = $_POST['password'];
+// データ受け取り
+$user_id = $_POST["user_id"];
+$password = $_POST["password"];
 
+// DB接続関数
 $pdo = connect_to_db();
 
 // ユーザ存在有無確認
@@ -30,16 +30,14 @@ if ($status == false) {
 if ($stmt->fetchColumn() > 0) {
     // user_idが1件以上該当した場合はエラーを表示して元のページに戻る
     // $count = $stmt->fetchColumn();
-    echo "<p>すでに登録されているメールアドレスです．</p>";
-    echo '<a href="login.php">login</a>';
+    echo "<p>すでに登録されているidです．</p>";
+    echo '<a href="user_login.php">login</a>';
     exit();
 }
 
-
-// データ登録SQL作成
+// ユーザ登録SQL作成
 // `created_at`と`updated_at`には実行時の`sysdate()`関数を用いて実行時の日時を入力する
-$sql =
-    'INSERT INTO faveritemo_user_table(id, user_id, password, is_admin, is_deleted, created_at, updated_at) VALUES(NULL, :user_id, :password, 0, 0, sysdate(), sysdate())';
+$sql = 'INSERT INTO faveritemo_user_table(id, user_id, password, is_admin, is_deleted, created_at, updated_at) VALUES(NULL, :user_id, :password, 0, 0, sysdate(), sysdate())';
 
 // SQL準備&実行
 $stmt = $pdo->prepare($sql);

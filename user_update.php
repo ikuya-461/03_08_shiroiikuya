@@ -8,7 +8,7 @@
 include('functions.php');
 
 // 送信データ受け取り
-$email = $_POST['email'];
+$user_id = $_POST['user_id'];
 $password = $_POST['password'];
 $id = $_POST['id'];
 
@@ -19,10 +19,10 @@ $pdo = connect_to_db();
 
 // UPDATE文を作成&実行
 $sql = 'UPDATE faveritemo_user_table 
-SET email=:email, password=:password
+SET user_id=:user_id, password=:password
 WHERE id=:id';
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);
+$stmt->bindValue(':user_id', $user_id, PDO::PARAM_STR);
 $stmt->bindValue(':password', $password, PDO::PARAM_STR);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();

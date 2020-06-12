@@ -1,6 +1,3 @@
-<?php
-
-?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -50,7 +47,7 @@
     <div class="select">
         <select name="select" onChange="location.href=value;">
             <option value="#"> --- 選択してください --- </option>
-            <option value="login.php">top</option>
+            <option value="user_login.php">top</option>
             <option value="anime.php">anime</option>
             <option value="novel.php">novel</option>
             <option value="game.php">game</option>

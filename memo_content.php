@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -9,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/main.css" />
+    <script src="js/top.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ravi+Prakash" rel="stylesheet">
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
     <title>favoritemo</title>
@@ -46,52 +43,20 @@
 </head>
 
 <body>
-    <h1 class="pagetitle">Novel</h1>
+
+    <h1 class="pagetitle">Comic</h1>
     <div class="select">
         <select name="select" onChange="location.href=value;">
             <option value="#"> --- 選択してください --- </option>
             <option value="user_login.php">top</option>
             <option value="anime.php">anime</option>
+            <option value="novel.php">novel</option>
             <option value="game.php">game</option>
-            <option value="comic.php">comic</option>
             <option value="movie.php">movie</option>
         </select>
     </div>
-    <ul class="inputform">
-
-        <li>
-            <label for="title">タイトル</label>
-            <input type="text" id="title">
-        </li>
-
-        <li>
-            <label for="auther">作者・著者</label>
-            <input type="text" id="auther">
-        </li>
-        <li>
-            <label for="volume">巻数</label>
-            <input type="text" id="volume">
-        </li>
-        <li>
-            <label for="when">観た時期</label>
-            <input type="text" id="when">
-        </li>
-
-        <li>
-            <p>感想・備考</p>
-            <textarea id="impression" cols="45" rows="5"></textarea>
-        </li>
-        <li>
-
-            <button id="send">send</button>
-        </li>
-    </ul>
 
     <ul id="output"></ul>
-
-
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -133,7 +98,7 @@
             return `${Y}/${m}/${d} ${H}:${i}:${s}`;
         }
 
-        var db = firebase.firestore().collection('book');
+        var db = firebase.firestore().collection('comic');
 
         $('#send').on('click', function() {
 

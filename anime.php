@@ -46,11 +46,11 @@
 </head>
 
 <body>
-    <h1 class="pagetitle">Anime</h1>
+    <h1 id="pagetitle" class="pagetitle">Anime</h1>
     <div class="select">
         <select name="select" onChange="location.href=value;">
             <option value="#"> --- 選択してください --- </option>
-            <option value="login.php">top</option>
+            <option value="user_login.php">top</option>
             <option value="game.php">game</option>
             <option value="novel.php">novel</option>
             <option value="comic.php">comic</option>

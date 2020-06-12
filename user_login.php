@@ -1,3 +1,8 @@
+<?php
+session_start();
+include('functions.php');
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -7,13 +12,13 @@
     <link href="https://fonts.googleapis.com/css?family=Ravi+Prakash" rel="stylesheet">
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
     <title>top</title>
-    <script type="text/javascript" src="js/top.js"></script>
+    <!-- <script type="text/javascript" src="js/top.js"></script> -->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <link type="text/css" rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <form action="user_create.php" method="POST">
+    <form action="user_login_act.php" method="POST">
         <header>
             <h1 class=" pagetitle text">favaritemo</h1>
         </header>
@@ -22,8 +27,8 @@
             <div class="loginform">
 
                 <div class="inputform text">
-                    <label for="email" class="formlabel">Email</label>
-                    <input type="email" id="email" class="forminput" name="email" />
+                    <label for="user_id" class="formlabel">User Id</label>
+                    <input type="text" id="user_id" class="forminput" name="user_id" />
                 </div>
 
                 <!-- パスワード入力フォーム -->
@@ -34,17 +39,17 @@
 
                 <!-- ボタン -->
                 <div class="signbutton">
-                    <button id="sign-up" class="sign text" onclick="onSignUpButtonClicked();">SignUp</button>
-                    <button id="sign-in" class="sign text" onclick="onSignInButtonClicked();">SignIn</button>
-                    <button id="sign-out" class="sign text" onclick="onSignOutButtonClicked();">SignOut</button>
+
+                    <button id="sign-in" class="sign text">SignIn</button>
+                    <button id="sign-out" class="sign text"><a href="user_logout.php">SignOut</a></button>
                 </div>
             </div>
-
-            <!-- ユーザー情報の出力用エリア -->
-            <h2 class="usertitle text">User Status</h2>
-            <div id="userinfo" class="userinfo">
-            </div>
     </form>
+
+    <div class="manager">
+        <button id="sign-up" class="sign text"><a href="user_register.php">SignUp</a></button>
+    </div>
+
     <div class="select">
         <select name="select" onChange="location.href=value;">
             <option value="#"> --- 選択してください --- </option>
@@ -59,10 +64,7 @@
     </main>
 
     <footer>
-        <div class="manager">
-            <a href="user_read.php">管理者画面</a>
-            <!-- <label for="" class="formlabel"></label> -->
-        </div>
+
     </footer>
 
 

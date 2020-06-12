@@ -1,99 +1,49 @@
-function initApp() {
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            printUserInfo(user.email, user.uid);
-            log(`ログインしました。: ${user.uid}`);
-            disableSignUpAndSignIn();
-            localStorage.saveKey = user.uid;
-            console.log(user.uid);
-        } else {
-            clearUserInfo();
-            disableSignOut();
-        }
-        clearForm();
+function convertFromFirestoreTimestampToDatetime(timestamp) {
+    const _d = timestamp ? new Date(timestamp * 1000) : new Date();
+    const Y = _d.getFullYear();
+    const m = (_d.getMonth() + 1).toString().padStart(2, '0');
+    const d = _d.getDate().toString().padStart(2, '0');
+    const H = _d.getHours().toString().padStart(2, '0');
+    const i = _d.getMinutes().toString().padStart(2, '0');
+    const s = _d.getSeconds().toString().padStart(2, '0');
+    return `${Y}/${m}/${d} ${H}:${i}:${s}`;
+}
+
+var db = firebase.firestore().collection('comic');
+
+$('#send').on('click', function () {
+
+    const dataObject = {
+        title: $('#title').val(), // inputの入力値
+        auther: $('#auther').val(),
+        volume: $('#volume').val(),
+        when: $('#when').val(),
+        impression: $('#impression').val(), // textareaの入力値
+        time: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
+    }
+    db.add(dataObject);
+    $('#impression').val('');
+});
+
+// 送信後にtextareaを空にする処理
+db.orderBy('time', 'desc').onSnapshot(function (querySnapshot) {
+    let str = '';
+    querySnapshot.docs.forEach(function (doc) {
+        // doc.idでidを，doc.data()でデータを取得できる const id = doc.id;
+
+        const id = doc.id;
+        const data = doc.data();
+        const datatime = convertFromFirestoreTimestampToDatetime(data.time.seconds);
+
+        str += '<li id="' + id + '" class="outputfield">';
+        str += '<p>' + data.title + '</p>';
+        str += '<p>' + data.auther + '</p>';
+        str += '<p>' + data.volume + '</p>';
+        str += '<p>' + data.when + '</p>';
+        str += '<p>' + data.impression + '</p>';
+        str += '<p>' + datatime + '</p>';
+        str += '</li>';
     });
-}
 
-initApp();
-
-function printUserInfo(email, uid) {
-    document.getElementById(
-        "userinfo"
-    ).innerHTML = `<p class="text">Email: ${email}</p><p class="text">UID: ${uid}</p>`;
-}
-
-function clearUserInfo() {
-    document.getElementById("userinfo").innerHTML = `<p class="text">Un login now</p>`;
-}
-
-function disableSignUpAndSignIn(login) {
-    document.getElementById("sign-up").disabled = true;
-    document.getElementById("sign-in").disabled = true;
-    document.getElementById("sign-out").disabled = false;
-    document.getElementById("email").disabled = true;
-    document.getElementById("password").disabled = true;
-}
-
-function disableSignOut() {
-    document.getElementById("sign-up").disabled = false;
-    document.getElementById("sign-in").disabled = false;
-    signOut = document.getElementById("sign-out").disabled = true;
-    email = document.getElementById("email").disabled = false;
-    password = document.getElementById("password").disabled = false;
-}
-
-function clearForm() {
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
-}
-
-onSignUpButtonClicked = function () {
-    const email = getEmail();
-    const password = getPassword();
-
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(function () {
-            log(`サインアップしました。: ${email}`);
-        })
-        .catch(function (error) {
-            log(`サインアップできませんでした。${error}`);
-        });
-};
-
-onSignInButtonClicked = function () {
-    const email = getEmail();
-    const password = getPassword();
-
-    firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .catch(function (error) {
-            log(`ログインできませんでした。${error}`);
-        });
-};
-
-function getEmail() {
-    return document.getElementById("email").value;
-}
-
-function getPassword() {
-    return document.getElementById("password").value;
-}
-
-onSignOutButtonClicked = function () {
-    firebase
-        .auth()
-        .signOut()
-        .then(function () {
-            log("ログアウトしました。");
-        })
-        .catch(function (error) {
-            log(`ログアウトできませんでした。${error}`);
-        });
-};
-
-function log(msg) {
-    document.getElementById("log").innerText += `${msg}\n`;
-}
+    $('#output').html(str);
+});

@@ -1,8 +1,3 @@
-<?php
-session_start();
-include('functions.php');
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -15,6 +10,12 @@ include('functions.php');
     <!-- <script type="text/javascript" src="js/top.js"></script> -->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <link type="text/css" rel="stylesheet" href="css/main.css">
+    <style>
+        a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,17 +39,20 @@ include('functions.php');
                 </div>
 
                 <!-- ボタン -->
-                <div class="signbutton">
 
+
+                <div class="signbutton">
                     <button id="sign-in" class="sign text">SignIn</button>
-                    <button id="sign-out" class="sign text"><a href="user_logout.php">SignOut</a></button>
+                    <p><a href=""></a></p>
+                </div>
+
+                <div class="signbutton">
+                    <button id="sign-up" class="sign text"><a href="user_register.php">SignUp</a></button>
                 </div>
             </div>
-    </form>
 
-    <div class="manager">
-        <button id="sign-up" class="sign text"><a href="user_register.php">SignUp</a></button>
-    </div>
+
+    </form>
 
     <div class="select">
         <select name="select" onChange="location.href=value;">
@@ -75,10 +79,7 @@ include('functions.php');
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script>
 
-
-    </script>
 </body>
 
 </html>

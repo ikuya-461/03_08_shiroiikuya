@@ -51,7 +51,11 @@ if ($status == false) {
     <!-- <script type="text/javascript" src="js/top.js"></script> -->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <link type="text/css" rel="stylesheet" href="css/main.css">
-
+    <style>
+        a {
+            color: black;
+        }
+    </style>
 </head>
 
 <body>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+include("functions.php");
+
+// ユーザ名取得
+$user_id = $_SESSION['id'];
+
+// DB接続
+$pdo = connect_to_db();
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -39,21 +50,28 @@
             flex-direction: column;
             padding: 0px;
         }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
     </style>
 </head>
 
 <body>
 
-    <h1 class="pagetitle">Comic</h1>
+    <h1 class="pagetitle">ダンジョン飯</h1>
     <div class="select">
         <select name="select" onChange="location.href=value;">
             <option value="#"> --- 選択してください --- </option>
-            <option value="user_login.php">top</option>
+            <option value="comic.php">comic</option>
             <option value="anime.php">anime</option>
             <option value="novel.php">novel</option>
             <option value="game.php">game</option>
             <option value="movie.php">movie</option>
         </select>
+        <button id="sign-out" class="sign text"><a href="user_logout.php">SignOut</a></button>
+        <button id="back" class="sign text"><a href="memo_index.php">BACK</a></button>
     </div>
 
     <ul id="output"></ul>
@@ -111,7 +129,13 @@
                 time: firebase.firestore.FieldValue.serverTimestamp(), // 登録日時
             }
             db.add(dataObject);
-            $('#impression').val('');
+            // document.sampleform.reset();
+
+            // $('#title').val('');
+            // $('#auther').val('');
+            // $('#volume').val('');
+            // $('#when').val('');
+            // $('#impression').val('');
         });
 
         // 送信後にtextareaを空にする処理

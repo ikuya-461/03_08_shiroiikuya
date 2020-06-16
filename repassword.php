@@ -28,29 +28,15 @@
         <main>
             <div class="loginform">
 
-                <div class="inputform text">
-                    <label for="user_id" class="formlabel">User Id</label>
-                    <input type="text" id="user_id" class="forminput" name="user_id" />
-                </div>
-
+                <h2>パスワードを送信しますので、登録したメールアドレスを入力して下さい</h2>
                 <!-- メールアドレス入力フォーム -->
                 <div class="inputform text">
                     <label for="email" class="formlabel">Email</label>
                     <input type="text" id="email" class="forminput" name="email" />
                 </div>
-
-                <!-- パスワード入力フォーム -->
-                <div class="inputform text">
-                    <label for="password" class="formlabel">Password</label>
-                    <input type="password" id="password" class="forminput" name="password" />
-                </div>
-
-                <!-- ボタン -->
                 <div class="signbutton">
-                    <button id="sign-up" class="sign text">SignUp</button>
-                    <button id="sign-in" class="sign text"><a href="user_login.php">SignIn</a></button>
+                    <button id="send" class="sign text">Send</button>
                 </div>
-        
             </div>
 
 

@@ -31,11 +31,17 @@ $val = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // ユーザ情報が取得できない場合はメッセージを表示
 if (!$val) {
-    echo "<p>ログイン情報に誤りがあります．</p>";
-    echo '<a href="user_login.php">login</a>';
-    exit();
+    echo "<script>
+    alert('ユーザーデータがありません');
+    location.href = 'user_login.php';
+    </script>";
 } else {
     // ログインできたら情報をsession領域に保存して一覧ページへ移動
+    $_SESSION = array();
+    $_SESSION["session_id"] = session_id();
+    $_SESSION["is_admin"] = $val["is_admin"];
+    $_SESSION["user_id"] = $val["user_id"];
+    $_SESSION["id"] = $val["id"];
     header("Location:memo_index.php");
     exit();
 }

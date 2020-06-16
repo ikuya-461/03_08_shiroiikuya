@@ -1,22 +1,10 @@
-<?php
-session_start();
-include("functions.php");
-check_session_id();
-
-// ユーザ名取得
-$user_id = $_SESSION['id'];
-
-// DB接続
-$pdo = connect_to_db();
-?>
-
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="js/top.js"></script>
     <link type="text/css" rel="stylesheet" href="css/main.css" />
     <link href="https://fonts.googleapis.com/css?family=Ravi+Prakash" rel="stylesheet">
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
@@ -160,8 +148,7 @@ $pdo = connect_to_db();
             let str = '';
 
             querySnapshot.docs.forEach(function(doc) {
-                // doc.idでidを，doc.data()でデータを取得できる const id = doc.id;
-
+                // doc.idでidを，doc.data()でデータを取得できる 
                 const id = doc.id;
                 const data = doc.data();
                 const datatime = convertFromFirestoreTimestampToDatetime(data.time.seconds);
@@ -235,6 +222,7 @@ $pdo = connect_to_db();
             }
         });
 
+
         $('#send').on('click', function() {
 
             const dataObject = {
@@ -254,6 +242,27 @@ $pdo = connect_to_db();
         });
 
         // 送信後にtextareaを空にする処理
+        db.orderBy('time', 'desc').onSnapshot(function(querySnapshot) {
+            let str = '';
+            querySnapshot.docs.forEach(function(doc) {
+                // doc.idでidを，doc.data()でデータを取得できる const id = doc.id;
+
+                const id = doc.id;
+                const data = doc.data();
+                const datatime = convertFromFirestoreTimestampToDatetime(data.time.seconds);
+
+                str += '<li id="' + id + '" class="outputfield">';
+                str += '<p>' + data.title + '</p>';
+                str += '<p>' + data.auther + '</p>';
+                str += '<p>' + data.volume + '</p>';
+                str += '<p>' + data.when + '</p>';
+                str += '<p>' + data.impression + '</p>';
+                str += '<p>' + datatime + '</p>';
+                str += '</li>';
+            });
+
+            $('#output').html(str);
+        });
     </script>
 
 </body>

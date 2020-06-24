@@ -166,5 +166,4 @@ $pdo = connect_to_db();
         });
     </script>
 </body>
-
 </html>
